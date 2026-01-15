@@ -1,0 +1,10 @@
+{
+  "name": "arc",
+  "url": "https://github.com",
+  "public": false,
+  "default_permissions": {
+    "actions": "read",
+    "administration": "write",
+    "organization_self_hosted_runners": "write"
+  }
+}
