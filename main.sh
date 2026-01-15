@@ -262,6 +262,14 @@ configure_scale_set_values() {
   if [ -n "$max_runners" ]; then
     yq --inplace ".maxRunners = $max_runners" "$WORKDIR/$SCALE_SET_CHART_DIR-$number/values.yaml"
   fi
+
+  if [[ $mode == "kubernetes" ]]; then
+    yq --inplace ".template.spec.containers[0].env[0].name = \"ACTIONS_RUNNER_REQUIRE_JOB_CONTAINER\"" "$WORKDIR/$SCALE_SET_CHART_DIR-$number/values.yaml"
+    yq --inplace ".template.spec.containers[0].env[0].value = \"false\"" "$WORKDIR/$SCALE_SET_CHART_DIR-$number/values.yaml"
+    yq --inplace ".containerMode.kubernetesModeWorkVolumeClaim.accessModes[0] = \"ReadWriteOnce\"" "$WORKDIR/$SCALE_SET_CHART_DIR-$number/values.yaml"
+    yq --inplace ".containerMode.kubernetesModeWorkVolumeClaim.storageClassName = \"standard\"" "$WORKDIR/$SCALE_SET_CHART_DIR-$number/values.yaml"
+    yq --inplace ".containerMode.kubernetesModeWorkVolumeClaim.resources.requests.storage = \"1Gi\"" "$WORKDIR/$SCALE_SET_CHART_DIR-$number/values.yaml"
+  fi
 }
 
 deploy_scale_set() {
@@ -296,3 +304,4 @@ deploy_controller
 
 ## scale set
 deploy_scale_set 1 "dind" 2 ""
+deploy_scale_set 2 "kubernetes" 2 ""
