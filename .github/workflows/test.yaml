@@ -1,0 +1,21 @@
+name: Test workflow
+on:
+  workflow_dispatch:
+    inputs:
+      runner_set:
+        description: "Runner set name"
+        default: "gha-runner-scale-set-1"
+
+      message:
+        description: "Message to print"
+        default: "Hello World"
+
+jobs:
+  test:
+    runs-on: ${{ inputs.runner_set }}
+    steps:
+      - name: Print message
+        run: |
+          echo "${{ inputs.message }}"
+          sleep 60
+          echo "Done"

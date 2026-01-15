@@ -1,10 +1,20 @@
 {
-  "name": "arc",
+  "name": "arc-app-abuelnaga-v2",
   "url": "https://github.com",
   "public": false,
   "default_permissions": {
     "actions": "read",
     "administration": "write",
-    "organization_self_hosted_runners": "write"
+    "organization_self_hosted_runners": "write",
+    "metadata": "read"
+  },
+  "default_events": [
+    "workflow_job",
+    "workflow_run"
+  ],
+  "redirect_url": "https://ff43bbe6f0b1.ngrok-free.app/hook",
+  "hook_attributes": {
+    "url": "https://github.com",
+    "active": false
   }
 }

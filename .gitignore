@@ -1,0 +1,5 @@
+gha-runner-scale-set-controller/
+gha-runner-scale-set*/
+github/apps/credentials.json
+requests.log
+tmp/
