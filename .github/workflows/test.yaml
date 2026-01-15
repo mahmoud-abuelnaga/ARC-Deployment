@@ -17,5 +17,5 @@ jobs:
       - name: Print message
         run: |
           echo "${{ inputs.message }}"
-          sleep 60
+          sleep 10
           echo "Done"
