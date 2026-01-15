@@ -1,0 +1,24 @@
+name: Container workflow
+on:
+  workflow_dispatch:
+    inputs:
+      runner_set:
+        description: "Runner set name"
+        default: "gha-runner-scale-set-1"
+
+jobs:
+  test:
+    runs-on: ${{ inputs.runner_set }}
+
+    services:
+      redis:
+        image: redis:latest
+        ports:
+          - 6379:6379
+
+    container: ubuntu:latest
+    steps:
+      - name: sleeping for some time
+        run: |
+          echo "Pretending to do work..."
+          sleep 360
